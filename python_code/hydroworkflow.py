@@ -70,22 +70,14 @@ dl_shp = geopandas.read_file("zip:///home/kyler/Documents/drainagelines/japan-ge
 ctch_shp = geopandas.read_file("zip:///home/kyler/Documents/catchments/japan-geoglows-catchment.zip/japan-geoglows-catchment/japan-geoglows-catchment.shp")
 
 # %%
-ctch_cent = ctch_shp.centroid
+ctch_point = ctch_shp.representative_point()
 
-centroid_shp = ctch_cent.to_file("/home/kyler/Documents/shapefiles/centroid_shape/centshape.shp")
+point_clip = geopandas.clip(ctch_point, gjson_shp)
 
-# %%
-cent_clip = geopandas.clip(ctch_cent, gjson_shp)
-
-cent_clip.plot()
-
-boo_list = ctch_shp.contains(cent_clip)
+boo_list = point_clip.intersects(ctch_shp)
 
 geo_select = ctch_shp[boo_list]
 
-geo_select.plot()
-
-#%%
 geo_select_shp = geo_select.to_file("/home/kyler/Documents/shapefiles/clip/clip.shp")
 
 # %%
