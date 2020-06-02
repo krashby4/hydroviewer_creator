@@ -72,6 +72,8 @@ ctch_shp = geopandas.read_file("zip:///home/kyler/Documents/catchments/japan-geo
 # %%
 ctch_point = ctch_shp.representative_point()
 
+ctch_point.to_file("/home/kyler/Documents/shapefiles/reppoint_shape")
+
 point_clip = geopandas.clip(ctch_point, gjson_shp)
 
 boo_list = point_clip.within(ctch_shp)
