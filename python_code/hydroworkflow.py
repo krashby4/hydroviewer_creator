@@ -57,7 +57,7 @@ shapefile_control.add_to(m)
 
 m
 
-#%%
+# %%
 gjson_file = geopandas.read_file("/home/kyler/Documents/gjson_files/data.geojson")
 gjson_file = gjson_file.to_crs("EPSG:3857")
 
@@ -72,14 +72,19 @@ ctch_shp = geopandas.read_file("zip:///home/kyler/Documents/catchments/japan-geo
 # %%
 ctch_point = ctch_shp.representative_point()
 
-ctch_point.to_file("/home/kyler/Documents/shapefiles/reppoint_shape")
+ctch_point.to_file("/home/kyler/Documents/shapefiles/reppoint_shape/ctch/ctch_point.shp")
 
-point_clip = geopandas.clip(ctch_point, gjson_shp)
+ctch_point_clip = geopandas.clip(ctch_point, gjson_shp)
 
-boo_list = point_clip.within(ctch_shp)
+ctch_boo_list = ctch_point_clip.within(ctch_shp)
 
-geo_select = ctch_shp[boo_list]
+ctch_select = ctch_shp[ctch_boo_list]
 
-geo_select_shp = geo_select.to_file("/home/kyler/Documents/shapefiles/clip/clip.shp")
+ctch_select.to_file("/home/kyler/Documents/shapefiles/clip/ctch/ctch_select.shp")
+
+# %%
+dl_point = dl_shp.representative_point()
+
+dl_point.to_file("/home/kyler/Documents/shapefiles/reppoint_shape/drainline/reppoint_dl.shp")
 
 # %%
