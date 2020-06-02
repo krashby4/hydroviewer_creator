@@ -58,20 +58,23 @@ shapefile_control.add_to(m)
 m
 
 #%%
-gjson_file = geopandas.read_file("/home/kyler/hydroviewer_creator/gjson_files/data.geojson")
+gjson_file = geopandas.read_file("/home/kyler/Documents/gjson_files/data.geojson")
 gjson_file = gjson_file.to_crs("EPSG:3857")
 
-gjson_file = gjson_file.to_file("/home/kyler/hydroviewer_creator/shapefiles/gjson/gshape.shp")
+gjson_file = gjson_file.to_file("/home/kyler/Documents/shapefiles/gjson/gshape.shp")
 
-gjson_shp = geopandas.read_file("/home/kyler/hydroviewer_creator/shapefiles/gjson/gshape.shp")
+gjson_shp = geopandas.read_file("/home/kyler/Documents/shapefiles/gjson/gshape.shp")
 
-dl_shp = geopandas.read_file("zip:///home/kyler/hydroviewer_creator/drainagelines/japan-geoglows-drainageline.zip/japan-geoglows-drainageline/japan-geoglows-drainageline.shp")
+dl_shp = geopandas.read_file("zip:///home/kyler/Documents/drainagelines/japan-geoglows-drainageline.zip/japan-geoglows-drainageline/japan-geoglows-drainageline.shp")
 
-ctch_shp = geopandas.read_file("zip:///home/kyler/hydroviewer_creator/catchments/japan-geoglows-catchment.zip/japan-geoglows-catchment/japan-geoglows-catchment.shp")
+ctch_shp = geopandas.read_file("zip:///home/kyler/Documents/catchments/japan-geoglows-catchment.zip/japan-geoglows-catchment/japan-geoglows-catchment.shp")
 
 # %%
 ctch_cent = ctch_shp.centroid
 
+centroid_shp = ctch_cent.to_file("/home/kyler/Documents/shapefiles/centroid_shape/centshape.shp")
+
+# %%
 cent_clip = geopandas.clip(ctch_cent, gjson_shp)
 
 cent_clip.plot()
@@ -83,6 +86,6 @@ geo_select = ctch_shp[boo_list]
 geo_select.plot()
 
 #%%
-geo_select_shp = geo_select.to_file("/home/kyler/hydroviewer_creator/shapefiles/clip.shp")
+geo_select_shp = geo_select.to_file("/home/kyler/Documents/shapefiles/clip/clip.shp")
 
 # %%
