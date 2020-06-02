@@ -74,7 +74,7 @@ ctch_point = ctch_shp.representative_point()
 
 point_clip = geopandas.clip(ctch_point, gjson_shp)
 
-boo_list = point_clip.intersects(ctch_shp)
+boo_list = point_clip.within(ctch_shp)
 
 geo_select = ctch_shp[boo_list]
 
