@@ -82,9 +82,22 @@ ctch_select = ctch_shp[ctch_boo_list]
 
 ctch_select.to_file("/home/kyler/Documents/shapefiles/clip/ctch/ctch_select.shp")
 
+ctch_select_shp = geopandas.read_file("/home/kyler/Documents/shapefiles/clip/ctch/ctch_select.shp")
+
 # %%
 dl_point = dl_shp.representative_point()
 
-dl_point.to_file("/home/kyler/Documents/shapefiles/reppoint_shape/drainline/reppoint_dl.shp")
+dl_point.to_file("/home/kyler/Documents/shapefiles/reppoint_shape/drain/dl_point.shp")
+
+dl_point_clip = geopandas.clip(dl_point, ctch_select_shp)
+
+dl_boo_list = dl_point_clip.intersects(dl_shp)
 
 # %%
+dl_boo_list.iloc[0:50]
+
+# %%
+dl_select = dl_shp[dl_boo_list]
+
+# %%
+dl_select.to_file("/home/kyler/Documents/shapefiles/clip/drain/dl_select.shp")
