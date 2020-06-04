@@ -3,20 +3,26 @@ import geopandas
 import folium
 import folium.plugins
 
+# Creates the map
 m = folium.Map(
     location=[40.76524, 140.399], #This coordinate shows example issue with catchments
     tiles='',
     zoom_start=3
 )
 
+# Define draw control options
 draw_control = folium.plugins.Draw(
     export=True
 )
 
+
+# Add draw control to map
 draw_control.add_to(m)
 
+# Defines url to HydroShare Geoserver
 geoserver_url = "https://geoserver.hydroshare.org/geoserver/wms"
 
+# Defines basemaps
 stamen_layer = folium.TileLayer(
     tiles='Stamen Terrain',
     name='Stamen Terrain'
@@ -27,9 +33,11 @@ stamen_layerwc = folium.TileLayer(
     name='Stamen Watercolor'
 )
 
+# Adds basemaps to map
 stamen_layer.add_to(m)
 stamen_layerwc.add_to(m)
 
+# WMS Layers for all the shapefiles. Adds both draingeline and catchments simultaneously.
 africa_shapefiles = folium.WmsTileLayer(
     url=geoserver_url,
     layers='HS-121bbce392a841178476001843e7510b:africa-geoglows-catchment africa-geoglows-catchment,HS-121bbce392a841178476001843e7510b:africa-geoglows-drainageline africa-geoglows-drainageline',
@@ -102,26 +110,34 @@ japan_shapefiles = folium.WmsTileLayer(
     show=False
 )
 
+# Adds which shapefiles are included in the layer control
 japan_shapefiles.add_to(m)
 
+# Defines layer control
 shapefile_control = folium.LayerControl()
 
+# Add layer control to map
 shapefile_control.add_to(m)
 
+# Call and display map
 m
 
 # %%
 
-# The code here reads the exported GeoJSON file drawn on the map, changes the projection, exports the GeoJSON to a shapefile, then reads the shapefile into a GeoDataFrame
-# The code also reads the necessary shapefiles into GeoDataFrames.
+# The code here reads the exported GeoJSON file drawn on the map
 gjson_file = geopandas.read_file("/home/kyler/Documents/gjson_files/data.geojson")
+
+# This changes the projection of the GeoJSON to match the shapefiles
 gjson_file = gjson_file.to_crs("EPSG:3857")
 
+# Exports the GeoJSON to a shapefile
 gjson_file = gjson_file.to_file("/home/kyler/Documents/shapefiles/gjson/gshape.shp")
 
+# Reads the GeoJSON shapefile into a GeoDataFrame
 gjson_shp = geopandas.read_file("/home/kyler/Documents/shapefiles/gjson/gshape.shp")
 
-dl_shp = geopandas.read_file("zip:///home/kyler/Documents/drainagelines/japan-geoglows-drainageline.zip/japan-geoglows-drainageline/japan-geoglows-drainageline.shp")
+# The two lines below read the downloaded files for the catchment and drainageline shapefiles into GeoDataFrames
+dl_shp = geopandas.read_file("zip:///home/kyler/Documents/drainagelines/japan_drainageline.zip/japan_drainageline.shp")
 
 ctch_shp = geopandas.read_file("zip:///home/kyler/Documents/catchments/japan-geoglows-catchment.zip/japan-geoglows-catchment/japan-geoglows-catchment.shp")
 
