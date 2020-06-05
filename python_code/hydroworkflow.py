@@ -13,11 +13,7 @@ m = folium.Map(
 # Define draw control options
 draw_control = folium.plugins.Draw(
     export=True
-)
-
-
-# Add draw control to map
-draw_control.add_to(m)
+).add_to(m)
 
 # Defines url to HydroShare Geoserver
 geoserver_url = "https://geoserver.hydroshare.org/geoserver/wms"
@@ -26,16 +22,12 @@ geoserver_url = "https://geoserver.hydroshare.org/geoserver/wms"
 stamen_layer = folium.TileLayer(
     tiles='Stamen Terrain',
     name='Stamen Terrain'
-)
+).add_to(m)
 
 stamen_layerwc = folium.TileLayer(
     tiles='Stamen Watercolor',
     name='Stamen Watercolor'
-)
-
-# Adds basemaps to map
-stamen_layer.add_to(m)
-stamen_layerwc.add_to(m)
+).add_to(m)
 
 # WMS Layers for all the shapefiles. Adds both draingeline and catchments simultaneously.
 africa_shapefiles = folium.WmsTileLayer(
@@ -45,7 +37,7 @@ africa_shapefiles = folium.WmsTileLayer(
     transparent=True,
     name='Africa',
     show=False
-)
+).add_to(m)
 
 australia_shapefiles = folium.WmsTileLayer(
     url=geoserver_url,
@@ -54,7 +46,7 @@ australia_shapefiles = folium.WmsTileLayer(
     transparent=True,
     name='Australia',
     show=False
-)
+).add_to(m)
 
 centralamerica_shapefiles = folium.WmsTileLayer(
     url=geoserver_url,
@@ -63,7 +55,7 @@ centralamerica_shapefiles = folium.WmsTileLayer(
     transparent=True,
     name='Central America',
     show=False
-)
+).add_to(m)
 
 centralasia_shapefiles = folium.WmsTileLayer(
     url=geoserver_url,
@@ -72,7 +64,7 @@ centralasia_shapefiles = folium.WmsTileLayer(
     transparent=True,
     name='Central Asia',
     show=False
-)
+).add_to(m)
 
 eastasia_shapefiles = folium.WmsTileLayer(
     url=geoserver_url,
@@ -81,7 +73,7 @@ eastasia_shapefiles = folium.WmsTileLayer(
     transparent=True,
     name='East Asia',
     show=False
-)
+).add_to(m)
 
 europe_shapefiles = folium.WmsTileLayer(
     url=geoserver_url,
@@ -90,7 +82,7 @@ europe_shapefiles = folium.WmsTileLayer(
     transparent=True,
     name='Europe',
     show=False
-)
+).add_to(m)
 
 islands_shapefiles = folium.WmsTileLayer(
     url=geoserver_url,
@@ -99,7 +91,7 @@ islands_shapefiles = folium.WmsTileLayer(
     transparent=True,
     name='Islands',
     show=False
-)
+).add_to(m)
 
 japan_shapefiles = folium.WmsTileLayer(
     url=geoserver_url,
@@ -108,19 +100,60 @@ japan_shapefiles = folium.WmsTileLayer(
     transparent=True,
     name='Japan',
     show=False
-)
+).add_to(m)
 
-# Adds which shapefiles are included in the layer control
-japan_shapefiles.add_to(m)
+middleeast_shapefiles = folium.WmsTileLayer(
+    url=geoserver_url,
+    layers='HS-6de72e805b34488ab1742dae64202a29:middle_east-geoglows-catchment middle_east-geoglows-catchment,HS-6de72e805b34488ab1742dae64202a29:middle_east-geoglows-drainageline middle_east-geoglows-drainageline',
+    fmt='image/png',
+    transparent=True,
+    name='Middle East',
+    show=False
+).add_to(m)
 
-# Defines layer control
-shapefile_control = folium.LayerControl()
+northamerica_shapefiles = folium.WmsTileLayer(
+    url=geoserver_url,
+    layers='HS-43ae93136e10439fbf2530e02156caf0:north_america-geoglows-catchment north_america-geoglows-catchment,HS-43ae93136e10439fbf2530e02156caf0:north_america-geoglows-drainageline north_america-geoglows-drainageline',
+    fmt='image/png',
+    transparent=True,
+    name='North America',
+    show=False
+).add_to(m)
 
-# Add layer control to map
-shapefile_control.add_to(m)
+southamerica_shapefiles = folium.WmsTileLayer(
+    url=geoserver_url,
+    layers='HS-94f7e730ea034706ae3497a75c764239:south_america-geoglows-catchment south_america-geoglows-catchment,HS-94f7e730ea034706ae3497a75c764239:south_america-geoglows-drainageline south_america-geoglows-drainageline',
+    fmt='image/png',
+    transparent=True,
+    name='South America',
+    show=False
+).add_to(m)
+
+southasia_shapefiles = folium.WmsTileLayer(
+    url=geoserver_url,
+    layers='HS-e8f2896be57643eb91220351b961b494:south_asia-geoglows-catchment south_asia-geoglows-catchment,HS-e8f2896be57643eb91220351b961b494:south_asia-geoglows-drainageline south_asia-geoglows-drainageline',
+    fmt='image/png',
+    transparent=True,
+    name='South Asia',
+    show=False
+).add_to(m)
+
+westasia_shapefiles = folium.WmsTileLayer(
+    url=geoserver_url,
+    layers='HS-b62087b814804242a1005368d0ba1b82:west_asia-geoglows-catchment west_asia-geoglows-catchment,HS-b62087b814804242a1005368d0ba1b82:west_asia-geoglows-drainageline west_asia-geoglows-drainageline',
+    fmt='image/png',
+    transparent=True,
+    name='West Asia',
+    show=False
+).add_to(m)
+
+layercontroller = folium.LayerControl().add_to(m)
 
 # Call and display map
 m
+
+# %%
+
 
 # %%
 
@@ -205,20 +238,19 @@ ctch_select_gjson = geopandas.read_file("/home/kyler/Documents/gjson_files/ctch.
 
 dl_select_gjson = geopandas.read_file("/home/kyler/Documents/gjson_files/dl.geojson")
 
-folium.GeoJson(
-    data=ctch_select_gjson,
-    name="Selected catchments"
-).add_to(nm)
-
-folium.GeoJson(
-    data=dl_select_gjson,
-    name="Selected drainagelines"
+folium.Choropleth(
+    geo_data=ctch_select_gjson,
+    fill_color='#EB9D00',
+    highlight=True,
+    name='Selected catchments'
 ).add_to(nm)
 
 newshapefile_control = folium.LayerControl()
 
 newshapefile_control.add_to(nm)
-
+ 
+nm
+# %%
 nm.save('/home/kyler/hydroviewer_creator/app_code/hv_selector.html')
 
 # %%
