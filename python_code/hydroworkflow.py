@@ -185,5 +185,40 @@ dl_select = dl_shp[dl_boo_list]
 # The GeoDataFrame is then exported into a shapefile.
 dl_select.to_file("/home/kyler/Documents/shapefiles/clip/drain/dl_select.shp")
 
+dl_select_shp = geopandas.read_file("/home/kyler/Documents/shapefiles/clip/drain/dl_select.shp")
+
+# %%
+nm = folium.Map(
+    location=[40.76524, 140.399],
+    tiles='',
+    zoom_start=3
+)
+
+# Adds basemaps to map
+stamen_layer.add_to(nm)
+
+ctch_select_shp.to_file("/home/kyler/Documents/gjson_files/ctch.geojson", driver='GeoJSON')
+
+dl_select_shp.to_file("/home/kyler/Documents/gjson_files/dl.geojson", driver='GeoJSON')
+
+ctch_select_gjson = geopandas.read_file("/home/kyler/Documents/gjson_files/ctch.geojson")
+
+dl_select_gjson = geopandas.read_file("/home/kyler/Documents/gjson_files/dl.geojson")
+
+folium.GeoJson(
+    data=ctch_select_gjson,
+    name="Selected catchments"
+).add_to(nm)
+
+folium.GeoJson(
+    data=dl_select_gjson,
+    name="Selected drainagelines"
+).add_to(nm)
+
+newshapefile_control = folium.LayerControl()
+
+newshapefile_control.add_to(nm)
+
+nm.save('/home/kyler/hydroviewer_creator/app_code/hv_selector.html')
 
 # %%
