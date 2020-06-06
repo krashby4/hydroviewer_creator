@@ -154,9 +154,6 @@ m
 
 # %%
 
-
-# %%
-
 # The code here reads the exported GeoJSON file drawn on the map
 gjson_file = geopandas.read_file("/home/kyler/Documents/gjson_files/data.geojson")
 
@@ -168,6 +165,51 @@ gjson_file = gjson_file.to_file("/home/kyler/Documents/shapefiles/gjson/gshape.s
 
 # Reads the GeoJSON shapefile into a GeoDataFrame
 gjson_shp = geopandas.read_file("/home/kyler/Documents/shapefiles/gjson/gshape.shp")
+
+africa_bndry_shp = geopandas.read_file("zip:///home/kyler/Documents/boundaries/africa-geoglows-boundary.shp.zip/africa-geoglows-boundary.shp/africa-geoglows-boundary.shp")
+australia_bndry_shp = geopandas.read_file("zip:///home/kyler/Documents/boundaries/australia-geoglows-boundary.shp.zip/australia-geoglows-boundary.shp/australia-geoglows-boundary.shp")
+centralam_bndry_shp = geopandas.read_file("zip:///home/kyler/Documents/boundaries/central_america-geoglows-boundary.shp.zip/central_america-geoglows-boundary.shp/central_america-geoglows-boundary.shp")
+centralas_bndry_shp = geopandas.read_file("zip:///home/kyler/Documents/boundaries/central_asia-geoglows-boundary.shp.zip/central_asia-geoglows-boundary.shp/central_asia-geoglows-boundary.shp")
+eastas_bndry_shp = geopandas.read_file("zip:///home/kyler/Documents/boundaries/east_asia-geoglows-boundary.shp.zip/east_asia-geoglows-boundary.shp/east_asia-geoglows-boundary.shp")
+europe_bndry_shp = geopandas.read_file("zip:///home/kyler/Documents/boundaries/europe-geoglows-boundary.shp.zip/europe-geoglows-boundary.shp/europe-geoglows-boundary.shp")
+islands_bndry_shp = geopandas.read_file("zip:///home/kyler/Documents/boundaries/islands-geoglows-boundary.shp.zip/islands-geoglows-boundary.shp/islands-geoglows-boundary.shp")
+japan_bndry_shp = geopandas.read_file("zip:///home/kyler/Documents/boundaries/japan-geoglows-boundary.shp.zip/japan-geoglows-boundary.shp/japan-geoglows-boundary.shp")
+mideast_bndry_shp = geopandas.read_file("zip:///home/kyler/Documents/boundaries/middle_east-geoglows-boundary.shp.zip/middle_east-geoglows-boundary.shp/middle_east-geoglows-boundary.shp")
+namerica_bndry_shp = geopandas.read_file("zip:///home/kyler/Documents/boundaries/north_america-geoglows-boundary.shp.zip/north_america-geoglows-boundary.shp/north_america-geoglows-boundary.shp")
+samerica_bndry_shp = geopandas.read_file("zip:///home/kyler/Documents/boundaries/south_america-geoglows-boundary.shp.zip/south_america-geoglows-boundary.shp/south_america-geoglows-boundary.shp")
+sasia_bndry_shp = geopandas.read_file("zip:///home/kyler/Documents/boundaries/south_asia-geoglows-boundary.shp.zip/south_asia-geoglows-boundary.shp/south_asia-geoglows-boundary.shp")
+wasia_bndry_shp = geopandas.read_file("zip:///home/kyler/Documents/boundaries/west_asia-geoglows-boundary.shp.zip/west_asia-geoglows-boundary.shp/west_asia-geoglows-boundary.shp")
+
+
+# %%
+if gjson_shp.intersects(africa_bndry_shp)[0]==True:
+    print("The gjson is in Africa")
+elif gjson_shp.intersects(australia_bndry_shp)[0]==True:
+    print("The gjson is in Australia")
+elif gjson_shp.intersects(centralam_bndry_shp)[0]==True:
+    print("The gjson is in Central America")
+elif gjson_shp.intersects(centralas_bndry_shp)[0]==True:
+    print("The gjson is in Central Asia")
+elif gjson_shp.intersects(eastas_bndry_shp)[0]==True:
+    print("The gjson is in East Asia")
+elif gjson_shp.intersects(europe_bndry_shp)[0]==True:
+    print("The gjson is in Europe")
+elif gjson_shp.intersects(islands_bndry_shp)[0]==True:
+    print("The gjson is in Islands ")
+elif gjson_shp.intersects(japan_bndry_shp)[0]==True:
+    print("The gjson is in Japan")
+elif gjson_shp.intersects(mideast_bndry_shp)[0]==True:
+    print("The gjson is in the Middle East")
+elif gjson_shp.intersects(namerica_bndry_shp)[0]==True:
+    print("The gjson is in North America")
+elif gjson_shp.intersects(samerica_bndry_shp)[0]==True:
+    print("The gjson is in South America")
+elif gjson_shp.intersects(sasia_bndry_shp)[0]==True:
+    print("The gjson is in South Asia")
+elif gjson_shp.intersects(wasia_bndry_shp)[0]==True:
+    print("The gjson is in West Asia")
+
+# %%
 
 # The two lines below read the downloaded files for the catchment and drainageline shapefiles into GeoDataFrames
 dl_shp = geopandas.read_file("zip:///home/kyler/Documents/drainagelines/japan_drainageline.zip/japan_drainageline.shp")
