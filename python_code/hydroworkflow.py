@@ -183,39 +183,64 @@ wasia_bndry_shp = geopandas.read_file("zip:///home/kyler/Documents/boundaries/we
 
 # %%
 if gjson_shp.intersects(africa_bndry_shp)[0]==True:
-    print("The gjson is in Africa")
+    dl_url = "zip:///home/kyler/Documents/drainagelines/africa_drainageline.zip/africa_drainageline.shp"
+    ctch_url = "zip:///home/kyler/Documents/catchments/africa_catchment.zip/africa_catchment.shp"
+
 elif gjson_shp.intersects(australia_bndry_shp)[0]==True:
-    print("The gjson is in Australia")
+    dl_url = "zip:///home/kyler/Documents/drainagelines/australia_drainageline.zip/australia_drainageline.shp"
+    ctch_url = "zip:///home/kyler/Documents/catchments/australia_catchment.zip/australia_catchment.shp"
+
 elif gjson_shp.intersects(centralam_bndry_shp)[0]==True:
-    print("The gjson is in Central America")
+    dl_url = "zip:///home/kyler/Documents/drainagelines/centralam_drainageline.zip/centralam_drainageline.shp"
+    ctch_url = "zip:///home/kyler/Documents/catchments/centralam_catchment.zip/centralam_catchment.shp"
+
 elif gjson_shp.intersects(centralas_bndry_shp)[0]==True:
-    print("The gjson is in Central Asia")
+    dl_url = "zip:///home/kyler/Documents/drainagelines/centralasia_drainageline.zip/centralasia_drainageline.shp"
+    ctch_url = "zip:///home/kyler/Documents/catchments/centralasia_catchment.zip/centralasia_catchment.shp"
+
 elif gjson_shp.intersects(eastas_bndry_shp)[0]==True:
-    print("The gjson is in East Asia")
+    dl_url = "zip:///home/kyler/Documents/drainagelines/eastasia_drainageline.zip/eastasia_drainageline.shp"
+    ctch_url = "zip:///home/kyler/Documents/catchments/eastasia_catchment.zip/eastasia_catchment.shp"
+
 elif gjson_shp.intersects(europe_bndry_shp)[0]==True:
-    print("The gjson is in Europe")
+    dl_url = "zip:///home/kyler/Documents/drainagelines/europe_drainageline.zip/europe_drainageline.shp"
+    ctch_url = "zip:///home/kyler/Documents/catchments/europe_catchment.zip/europe_catchment.shp"
+
 elif gjson_shp.intersects(islands_bndry_shp)[0]==True:
-    print("The gjson is in Islands ")
+    dl_url = "zip:///home/kyler/Documents/drainagelines/islands_drainageline.zip/islands_drainageline.shp"
+    ctch_url = "zip:///home/kyler/Documents/catchmentsislands_catchment.zip/islands_catchment.shp"
+
 elif gjson_shp.intersects(japan_bndry_shp)[0]==True:
-    print("The gjson is in Japan")
+    dl_url = "zip:///home/kyler/Documents/drainagelines/japan_drainageline.zip/japan_drainageline.shp"
+    ctch_url = "zip:///home/kyler/Documents/catchments/japan_catchment.zip/japan_catchment.shp"
+
 elif gjson_shp.intersects(mideast_bndry_shp)[0]==True:
-    print("The gjson is in the Middle East")
+    dl_url = "zip:///home/kyler/Documents/drainagelines/middleeast_drainageline.zip/middleeast_drainageline.shp"
+    ctch_url = "zip:///home/kyler/Documents/catchments/middleeast_catchment.zip/middleeast_catchment.shp"
+
 elif gjson_shp.intersects(namerica_bndry_shp)[0]==True:
-    print("The gjson is in North America")
+    dl_url = "zip:///home/kyler/Documents/drainagelines/northamerica_drainageline.zip/northamerica_drainageline.shp"
+    ctch_url = "zip:///home/kyler/Documents/catchments/northamerica_catchment.zip/northamerica_catchment.shp"
+
 elif gjson_shp.intersects(samerica_bndry_shp)[0]==True:
-    print("The gjson is in South America")
+    dl_url = "zip:///home/kyler/Documents/drainagelines/samerica_drainageline.zip/samerica_drainageline.shp"
+    ctch_url = "zip:///home/kyler/Documents/catchments/samerica_catchment.zip/samerica_catchment.shp"
+
 elif gjson_shp.intersects(sasia_bndry_shp)[0]==True:
-    print("The gjson is in South Asia")
+    dl_url = "zip:///home/kyler/Documents/drainagelines/southasia_drainageline.zip/southasia_drainageline.shp"
+    ctch_url = "zip:///home/kyler/Documents/catchments/southasia_catchment.zip/southasia_catchment.shp"
+
 elif gjson_shp.intersects(wasia_bndry_shp)[0]==True:
-    print("The gjson is in West Asia")
+    dl_url = "zip:///home/kyler/Documents/drainagelines/wasia_drainageline.zip/wasia_drainageline.shp"
+    ctch_url = "zip:///home/kyler/Documents/catchments/wasia_catchment.zip/wasia_catchment.shp"
+
 
 # %%
 
 # The two lines below read the downloaded files for the catchment and drainageline shapefiles into GeoDataFrames
-dl_shp = geopandas.read_file("zip:///home/kyler/Documents/drainagelines/japan_drainageline.zip/japan_drainageline.shp")
+dl_shp = geopandas.read_file(dl_url)
 
-ctch_shp = geopandas.read_file("zip:///home/kyler/Documents/catchments/japan-geoglows-catchment.zip/japan-geoglows-catchment/japan-geoglows-catchment.shp")
-
+ctch_shp = geopandas.read_file(ctch_url)
 
 # Here the code generates representative points for each polygon in the catchment shapefile/GeoDataFrame
 ctch_point = ctch_shp.representative_point()
