@@ -2,7 +2,38 @@
 import geopandas
 import folium
 import folium.plugins
+import os
 
+# %%
+home_dir = os.path.expanduser("~")
+
+if os.path.isdir(os.path.join(home_dir,'hydroviewer_creator')) == False:
+    os.mkdir(os.path.join(home_dir,'hydroviewer_creator'))
+
+if os.path.isdir(os.path.join(home_dir,'hydroviewer_creator', 'shapefiles')) == False:
+    os.mkdir(os.path.join(home_dir,'hydroviewer_creator', 'shapefiles'))
+
+if os.path.isdir(os.path.join(home_dir,'hydroviewer_creator','shapefiles','downloaded_shapefiles')) == False:
+    os.mkdir(os.path.join(home_dir,'hydroviewer_creator','shapefiles','downloaded_shapefiles'))
+
+if os.path.isdir(os.path.join(home_dir,'hydroviewer_creator','shapefiles','downloaded_shapefiles','catchment')) == False:
+    os.mkdir(os.path.join(home_dir,'hydroviewer_creator','shapefiles','downloaded_shapefiles','catchment'))
+
+if os.path.isdir(os.path.join(home_dir,'hydroviewer_creator','shapefiles','downloaded_shapefiles','drainageline')) == False:
+    os.mkdir(os.path.join(home_dir,'hydroviewer_creator','shapefiles','downloaded_shapefiles','drainageline'))
+
+if os.path.isdir(os.path.join(home_dir,'hydroviewer_creator','shapefiles','selected_shapefiles')) == False:
+    os.mkdir(os.path.join(home_dir,'hydroviewer_creator','shapefiles','selected_shapefiles'))
+
+if os.path.isdir(os.path.join(home_dir,'hydroviewer_creator','shapefiles','selected_shapefiles','catchment_select')) == False:
+    os.mkdir(os.path.join(home_dir,'hydroviewer_creator','shapefiles','selected_shapefiles','catchment_select'))
+
+if os.path.isdir(os.path.join(home_dir,'hydroviewer_creator','shapefiles','selected_shapefiles','drainageline_select')) == False:
+    os.mkdir(os.path.join(home_dir,'hydroviewer_creator','shapefiles','selected_shapefiles','drainageline_select'))
+
+if os.path.isdir(os.path.join(home_dir,'hydroviewer_creator','gjson_files')) == False:
+    os.mkdir(os.path.join(home_dir,'hydroviewer_creator','gjson_files'))
+# %%
 # Creates the map
 m = folium.Map(
     location=[40.76524, 140.399], #This coordinate shows example issue with catchments
