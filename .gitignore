@@ -1,1 +1,7 @@
 .vscode/settings.json
+
+# Ignore shapefiles
+shapefiles
+
+# Ignore gjson_files
+gjson_files
