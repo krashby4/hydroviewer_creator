@@ -52,9 +52,6 @@ if os.path.isdir(os.path.join(proj_dir,'shapefiles','reppoint_shapefile','dl_poi
     os.mkdir(os.path.join(proj_dir,'shapefiles','reppoint_shapefile','dl_point'))
 
 # %%
-user_input = 'Japan'
-
-# %%
 # Creates the map
 m = folium.Map(
     location=[40.76524, 140.399], #This coordinate shows example issue with catchments
@@ -100,7 +97,7 @@ australia_shapefiles = folium.WmsTileLayer(
     show=False
 ).add_to(m)
 
-centralamerica_shapefiles = folium.WmsTileLayer(
+central_america_shapefiles = folium.WmsTileLayer(
     url=geoserver_url,
     layers='HS-36fae4f0e04d40ccb08a8dd1df88365e:central_america-geoglows-catchment central_america-geoglows-catchment,HS-36fae4f0e04d40ccb08a8dd1df88365e:central_america-geoglows-drainageline central_america-geoglows-drainageline',
     fmt='image/png',
@@ -109,7 +106,7 @@ centralamerica_shapefiles = folium.WmsTileLayer(
     show=False
 ).add_to(m)
 
-centralasia_shapefiles = folium.WmsTileLayer(
+central_asia_shapefiles = folium.WmsTileLayer(
     url=geoserver_url,
     layers='HS-383bc50a88ae4711a8d834a322ced2d5:central_asia-geoglows-catchment central_asia-geoglows-catchment,HS-383bc50a88ae4711a8d834a322ced2d5:central_asia-geoglows-drainageline central_asia-geoglows-drainageline',
     fmt='image/png',
@@ -118,7 +115,7 @@ centralasia_shapefiles = folium.WmsTileLayer(
     show=False
 ).add_to(m)
 
-eastasia_shapefiles = folium.WmsTileLayer(
+east_asia_shapefiles = folium.WmsTileLayer(
     url=geoserver_url,
     layers='HS-85ac5bf29cff4aa48a08b8aaeb8e3023:east_asia-geoglows-catchment east_asia-geoglows-catchment,HS-85ac5bf29cff4aa48a08b8aaeb8e3023:east_asia-geoglows-drainageline east_asia-geoglows-drainageline',
     fmt='image/png',
@@ -154,7 +151,7 @@ japan_shapefiles = folium.WmsTileLayer(
     show=False
 ).add_to(m)
 
-middleeast_shapefiles = folium.WmsTileLayer(
+middle_east_shapefiles = folium.WmsTileLayer(
     url=geoserver_url,
     layers='HS-6de72e805b34488ab1742dae64202a29:middle_east-geoglows-catchment middle_east-geoglows-catchment,HS-6de72e805b34488ab1742dae64202a29:middle_east-geoglows-drainageline middle_east-geoglows-drainageline',
     fmt='image/png',
@@ -163,7 +160,7 @@ middleeast_shapefiles = folium.WmsTileLayer(
     show=False
 ).add_to(m)
 
-northamerica_shapefiles = folium.WmsTileLayer(
+north_america_shapefiles = folium.WmsTileLayer(
     url=geoserver_url,
     layers='HS-43ae93136e10439fbf2530e02156caf0:north_america-geoglows-catchment north_america-geoglows-catchment,HS-43ae93136e10439fbf2530e02156caf0:north_america-geoglows-drainageline north_america-geoglows-drainageline',
     fmt='image/png',
@@ -172,7 +169,7 @@ northamerica_shapefiles = folium.WmsTileLayer(
     show=False
 ).add_to(m)
 
-southamerica_shapefiles = folium.WmsTileLayer(
+south_america_shapefiles = folium.WmsTileLayer(
     url=geoserver_url,
     layers='HS-94f7e730ea034706ae3497a75c764239:south_america-geoglows-catchment south_america-geoglows-catchment,HS-94f7e730ea034706ae3497a75c764239:south_america-geoglows-drainageline south_america-geoglows-drainageline',
     fmt='image/png',
@@ -181,7 +178,7 @@ southamerica_shapefiles = folium.WmsTileLayer(
     show=False
 ).add_to(m)
 
-southasia_shapefiles = folium.WmsTileLayer(
+south_asia_shapefiles = folium.WmsTileLayer(
     url=geoserver_url,
     layers='HS-e8f2896be57643eb91220351b961b494:south_asia-geoglows-catchment south_asia-geoglows-catchment,HS-e8f2896be57643eb91220351b961b494:south_asia-geoglows-drainageline south_asia-geoglows-drainageline',
     fmt='image/png',
@@ -190,7 +187,7 @@ southasia_shapefiles = folium.WmsTileLayer(
     show=False
 ).add_to(m)
 
-westasia_shapefiles = folium.WmsTileLayer(
+west_asia_shapefiles = folium.WmsTileLayer(
     url=geoserver_url,
     layers='HS-b62087b814804242a1005368d0ba1b82:west_asia-geoglows-catchment west_asia-geoglows-catchment,HS-b62087b814804242a1005368d0ba1b82:west_asia-geoglows-drainageline west_asia-geoglows-drainageline',
     fmt='image/png',
@@ -221,26 +218,167 @@ gjson_shp = geopandas.read_file(os.path.join(proj_dir,'shapefiles','gjson_shapef
 
 # %%
 # HydorShare Resource IDs
+africa_id = '121bbce392a841178476001843e7510b'
+australia_id = '9572eb7fa8744807962b9268593bd4ad'
+central_america_id = '36fae4f0e04d40ccb08a8dd1df88365e'
+central_asia_id = '383bc50a88ae4711a8d834a322ced2d5'
+east_asia_id = '85ac5bf29cff4aa48a08b8aaeb8e3023'
+europe_id = 'c14e1644a94744d8b3204a5be91acaed'
+islands_id = 'e3910292be5e4fd79597c6c91cb084cf'
 japan_id = 'df5f3e52c51b419d8ee143b919a449b3'
+middle_east_id = '6de72e805b34488ab1742dae64202a29'
+north_america_id = '43ae93136e10439fbf2530e02156caf0'
+south_america_id = '94f7e730ea034706ae3497a75c764239'
+south_asia_id = 'e8f2896be57643eb91220351b961b494'
+west_asia_id = 'b62087b814804242a1005368d0ba1b82'
 # %%
 from hs_restclient import HydroShare, HydroShareAuthBasic
 auth = HydroShareAuthBasic(username='krashby4', password='Neededtochangehydrosharepassword4*')
 hs = HydroShare(auth=auth)
+fname = 'africa-geoglows-boundary.zip'
+fpath = hs.getResourceFile(africa_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
+fname = 'australia-geoglows-boundary.zip'
+fpath = hs.getResourceFile(australia_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
+fname = 'central_america-geoglows-boundary.zip'
+fpath = hs.getResourceFile(central_america_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
+fname = 'central_asia-geoglows-boundary.zip'
+fpath = hs.getResourceFile(central_asia_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
+fname = 'east_asia-geoglows-boundary.zip'
+fpath = hs.getResourceFile(east_asia_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
+fname = 'europe-geoglows-boundary.zip'
+fpath = hs.getResourceFile(europe_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
+fname = 'islands-geoglows-boundary.zip'
+fpath = hs.getResourceFile(islands_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
 fname = 'japan-geoglows-boundary.zip'
 fpath = hs.getResourceFile(japan_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
+fname = 'middle_east-geoglows-boundary.zip'
+fpath = hs.getResourceFile(middle_east_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
+fname = 'north_america-geoglows-boundary.zip'
+fpath = hs.getResourceFile(north_america_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
+fname = 'south_america-geoglows-boundary.zip'
+fpath = hs.getResourceFile(south_america_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
+fname = 'south_asia-geoglows-boundary.zip'
+fpath = hs.getResourceFile(south_asia_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
+fname = 'west_asia-geoglows-boundary.zip'
+fpath = hs.getResourceFile(west_asia_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
 # %%
-japan_bndry_shp = geopandas.read_file("zip:///"+os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries','japan-geoglows-boundary.zip','japan-geoglows-boundary.shp'))
+africa_bndry_gdf = geopandas.read_file("zip:///"+os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries','africa-geoglows-boundary.zip','africa-geoglows-boundary.shp'))
+australia_bndry_gdf = geopandas.read_file("zip:///"+os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries','australia-geoglows-boundary.zip','australia-geoglows-boundary.shp'))
+central_america_bndry_gdf = geopandas.read_file("zip:///"+os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries','central_america-geoglows-boundary.zip','central_america-geoglows-boundary.shp'))
+central_asia_bndry_gdf = geopandas.read_file("zip:///"+os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries','central_asia-geoglows-boundary.zip','central_asia-geoglows-boundary.shp'))
+east_asia_bndry_gdf = geopandas.read_file("zip:///"+os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries','east_asia-geoglows-boundary.zip','east_asia-geoglows-boundary.shp'))
+europe_bndry_gdf = geopandas.read_file("zip:///"+os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries','europe-geoglows-boundary.zip','europe-geoglows-boundary.shp'))
+islands_bndry_gdf = geopandas.read_file("zip:///"+os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries','islands-geoglows-boundary.zip','islands-geoglows-boundary.shp'))
+japan_bndry_gdf = geopandas.read_file("zip:///"+os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries','japan-geoglows-boundary.zip','japan-geoglows-boundary.shp'))
+middle_east_bndry_gdf = geopandas.read_file("zip:///"+os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries','middle_east-geoglows-boundary.zip','middle_east-geoglows-boundary.shp'))
+north_america_bndry_gdf = geopandas.read_file("zip:///"+os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries','north_america-geoglows-boundary.zip','north_america-geoglows-boundary.shp'))
+south_america_bndry_gdf = geopandas.read_file("zip:///"+os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries','south_america-geoglows-boundary.zip','south_america-geoglows-boundary.shp'))
+south_asia_bndry_gdf = geopandas.read_file("zip:///"+os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries','south_asia-geoglows-boundary.zip','south_asia-geoglows-boundary.shp'))
+west_asia_bndry_gdf = geopandas.read_file("zip:///"+os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries','west_asia-geoglows-boundary.zip','west_asia-geoglows-boundary.shp'))
+# %%
+if gjson_shp.intersects(africa_bndry_gdf)[0]==True:
+    fname = 'africa-geoglows-catchment.zip'
+    fpath = hs.getResourceFile(africa_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment'))
+    ctch_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment','africa-geoglows-catchment.zip','africa-geoglows-catchment.shp')
+    fname = 'africa-geoglows-drainageline.zip'
+    fpath = hs.getResourceFile(africa_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline'))
+    dl_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline','africa-geoglows-drainageline.zip','africa-geoglows-drainageline.shp')
 
-# %%
-if gjson_shp.intersects(japan_bndry_shp)[0]==True:
+elif gjson_shp.intersects(australia_bndry_gdf)[0]==True:
+    fname = 'australia-geoglows-catchment.zip'
+    fpath = hs.getResourceFile(africa_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment'))
+    ctch_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment','australia-geoglows-catchment.zip','australia-geoglows-catchment.shp')
+    fname = 'australia-geoglows-drainageline.zip'
+    fpath = hs.getResourceFile(africa_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline'))
+    dl_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline','australia-geoglows-drainageline.zip','australia-geoglows-drainageline.shp')
+
+elif gjson_shp.intersects(central_america_bndry_gdf)[0]==True:
+    fname = 'central_america-geoglows-catchment.zip'
+    fpath = hs.getResourceFile(africa_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment'))
+    ctch_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment','central_america-geoglows-catchment.zip','central_america-geoglows-catchment.shp')
+    fname = 'central_america-geoglows-drainageline.zip'
+    fpath = hs.getResourceFile(africa_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline'))
+    dl_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline','central_america-geoglows-drainageline.zip','central_america-geoglows-drainageline.shp')
+
+elif gjson_shp.intersects(central_asia_bndry_gdf)[0]==True:
+    fname = 'central_asia-geoglows-catchment.zip'
+    fpath = hs.getResourceFile(africa_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment'))
+    ctch_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment','central_asia-geoglows-catchment.zip','central_asia-geoglows-catchment.shp')
+    fname = 'central_asia-geoglows-drainageline.zip'
+    fpath = hs.getResourceFile(africa_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline'))
+    dl_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline','central_asia-geoglows-drainageline.zip','central_asia-geoglows-drainageline.shp')
+
+elif gjson_shp.intersects(east_asia_bndry_gdf)[0]==True:
+    fname = 'east_asia-geoglows-catchment.zip'
+    fpath = hs.getResourceFile(africa_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment'))
+    ctch_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment','east_asia-geoglows-catchment.zip','east_asia-geoglows-catchment.shp')
+    fname = 'east_asia-geoglows-drainageline.zip'
+    fpath = hs.getResourceFile(africa_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline'))
+    dl_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline','east_asia-geoglows-drainageline.zip','east_asia-geoglows-drainageline.shp')
+
+elif gjson_shp.intersects(europe_bndry_gdf)[0]==True:
+    fname = 'europe-geoglows-catchment.zip'
+    fpath = hs.getResourceFile(africa_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment'))
+    ctch_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment','europe-geoglows-catchment.zip','europe-geoglows-catchment.shp')
+    fname = 'europe-geoglows-drainageline.zip'
+    fpath = hs.getResourceFile(africa_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline'))
+    dl_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline','europe-geoglows-drainageline.zip','europe-geoglows-drainageline.shp')
+
+elif gjson_shp.intersects(islands_bndry_gdf)[0]==True:
+    fname = 'islands-geoglows-catchment.zip'
+    fpath = hs.getResourceFile(africa_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment'))
+    ctch_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment','islands-geoglows-catchment.zip','islands-geoglows-catchment.shp')
+    fname = 'islands-geoglows-drainageline.zip'
+    fpath = hs.getResourceFile(africa_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline'))
+    dl_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline','islands-geoglows-drainageline.zip','islands-geoglows-drainageline.shp')
+
+elif gjson_shp.intersects(japan_bndry_gdf)[0]==True:
     fname = 'japan-geoglows-catchment.zip'
     fpath = hs.getResourceFile(japan_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment'))
     ctch_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment','japan-geoglows-catchment.zip','japan-geoglows-catchment.shp')
     fname = 'japan-geoglows-drainageline.zip'
     fpath = hs.getResourceFile(japan_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline'))
     dl_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline','japan-geoglows-drainageline.zip','japan-geoglows-drainageline.shp')
-else:
-    print("Drawn polygon is likely in a country that is undefined at the moment")
+
+elif gjson_shp.intersects(middle_east_bndry_gdf)[0]==True:
+    fname = 'middle_east-geoglows-catchment.zip'
+    fpath = hs.getResourceFile(japan_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment'))
+    ctch_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment','middle_east-geoglows-catchment.zip','middle_east-geoglows-catchment.shp')
+    fname = 'middle_east-geoglows-drainageline.zip'
+    fpath = hs.getResourceFile(japan_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline'))
+    dl_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline','middle_east-geoglows-drainageline.zip','middle_east-geoglows-drainageline.shp')
+
+elif gjson_shp.intersects(north_america_bndry_gdf)[0]==True:
+    fname = 'north_america-geoglows-catchment.zip'
+    fpath = hs.getResourceFile(japan_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment'))
+    ctch_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment','north_america-geoglows-catchment.zip','north_america-geoglows-catchment.shp')
+    fname = 'north_america-geoglows-drainageline.zip'
+    fpath = hs.getResourceFile(japan_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline'))
+    dl_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline','north_america-geoglows-drainageline.zip','north_america-geoglows-drainageline.shp')
+
+elif gjson_shp.intersects(south_america_bndry_gdf)[0]==True:
+    fname = 'south_america-geoglows-catchment.zip'
+    fpath = hs.getResourceFile(japan_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment'))
+    ctch_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment','south_america-geoglows-catchment.zip','south_america-geoglows-catchment.shp')
+    fname = 'south_america-geoglows-drainageline.zip'
+    fpath = hs.getResourceFile(japan_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline'))
+    dl_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline','south_america-geoglows-drainageline.zip','south_america-geoglows-drainageline.shp')
+
+elif gjson_shp.intersects(south_asia_bndry_gdf)[0]==True:
+    fname = 'south_asia-geoglows-catchment.zip'
+    fpath = hs.getResourceFile(japan_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment'))
+    ctch_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment','south_asia-geoglows-catchment.zip','south_asia-geoglows-catchment.shp')
+    fname = 'south_asia-geoglows-drainageline.zip'
+    fpath = hs.getResourceFile(japan_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline'))
+    dl_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline','south_asia-geoglows-drainageline.zip','south_asia-geoglows-drainageline.shp')
+
+elif gjson_shp.intersects(west_asia_bndry_gdf)[0]==True:
+    fname = 'west_asia-geoglows-catchment.zip'
+    fpath = hs.getResourceFile(japan_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment'))
+    ctch_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment','west_asia-geoglows-catchment.zip','west_asia-geoglows-catchment.shp')
+    fname = 'west_asia-geoglows-drainageline.zip'
+    fpath = hs.getResourceFile(japan_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline'))
+    dl_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline','west_asia-geoglows-drainageline.zip','west_asia-geoglows-drainageline.shp')
 
 # %%
 # The two lines below read the downloaded files for the catchment and drainageline shapefiles into GeoDataFrames
@@ -293,6 +431,33 @@ dl_select = dl_shp[dl_boo_list]
 dl_select.to_file(os.path.join(proj_dir,'shapefiles','selected_shapefiles','drainageline_select','dl_select.shp'))
 
 dl_select_shp = geopandas.read_file(os.path.join(proj_dir,'shapefiles','selected_shapefiles','drainageline_select','dl_select.shp'))
+
+# %%
+# Zip file
+from zipfile import ZipFile
+
+ctch_zip = ZipFile(os.path.join(proj_dir,'shapefiles','selected_shapefiles','catchment_select','catchment_select.zip'),'w')
+
+ctch_zip.write(os.path.join(proj_dir,'shapefiles','selected_shapefiles','catchment_select','ctch_select.cpg'),arcname='ctch_select.cpg')
+ctch_zip.write(os.path.join(proj_dir,'shapefiles','selected_shapefiles','catchment_select','ctch_select.dbf'),arcname='ctch_select.dbf')
+ctch_zip.write(os.path.join(proj_dir,'shapefiles','selected_shapefiles','catchment_select','ctch_select.prj'),arcname='ctch_select.prj')
+ctch_zip.write(os.path.join(proj_dir,'shapefiles','selected_shapefiles','catchment_select','ctch_select.shp'),arcname='ctch_select.shp')
+ctch_zip.write(os.path.join(proj_dir,'shapefiles','selected_shapefiles','catchment_select','ctch_select.shx'),arcname='ctch_select.shx')
+
+ctch_zip.close()
+
+dl_zip = ZipFile(os.path.join(proj_dir,'shapefiles','selected_shapefiles','drainageline_select','drainageline_select.zip'),'w')
+
+dl_zip.write(os.path.join(proj_dir,'shapefiles','selected_shapefiles','drainageline_select','dl_select.cpg'),arcname='dl_select.cpg')
+dl_zip.write(os.path.join(proj_dir,'shapefiles','selected_shapefiles','drainageline_select','dl_select.dbf'),arcname='dl_select.dbf')
+dl_zip.write(os.path.join(proj_dir,'shapefiles','selected_shapefiles','drainageline_select','dl_select.prj'),arcname='dl_select.prj')
+dl_zip.write(os.path.join(proj_dir,'shapefiles','selected_shapefiles','drainageline_select','dl_select.shp'),arcname='dl_select.shp')
+dl_zip.write(os.path.join(proj_dir,'shapefiles','selected_shapefiles','drainageline_select','dl_select.shx'),arcname='dl_select.shx')
+
+dl_zip.close()
+
+# %%
+
 
 # %%
 nm = folium.Map(
