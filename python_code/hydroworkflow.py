@@ -10,29 +10,50 @@ home_dir = os.path.expanduser("~")
 if os.path.isdir(os.path.join(home_dir,'hydroviewer_creator')) == False:
     os.mkdir(os.path.join(home_dir,'hydroviewer_creator'))
 
-if os.path.isdir(os.path.join(home_dir,'hydroviewer_creator', 'shapefiles')) == False:
-    os.mkdir(os.path.join(home_dir,'hydroviewer_creator', 'shapefiles'))
+proj_dir = os.path.join(home_dir,'hydroviewer_creator')
 
-if os.path.isdir(os.path.join(home_dir,'hydroviewer_creator','shapefiles','downloaded_shapefiles')) == False:
-    os.mkdir(os.path.join(home_dir,'hydroviewer_creator','shapefiles','downloaded_shapefiles'))
+if os.path.isdir(os.path.join(proj_dir,'shapefiles')) == False:
+    os.mkdir(os.path.join(proj_dir,'shapefiles'))
 
-if os.path.isdir(os.path.join(home_dir,'hydroviewer_creator','shapefiles','downloaded_shapefiles','catchment')) == False:
-    os.mkdir(os.path.join(home_dir,'hydroviewer_creator','shapefiles','downloaded_shapefiles','catchment'))
+if os.path.isdir(os.path.join(proj_dir,'shapefiles','downloaded_shapefiles')) == False:
+    os.mkdir(os.path.join(proj_dir,'shapefiles','downloaded_shapefiles'))
 
-if os.path.isdir(os.path.join(home_dir,'hydroviewer_creator','shapefiles','downloaded_shapefiles','drainageline')) == False:
-    os.mkdir(os.path.join(home_dir,'hydroviewer_creator','shapefiles','downloaded_shapefiles','drainageline'))
+if os.path.isdir(os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment')) == False:
+    os.mkdir(os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment'))
 
-if os.path.isdir(os.path.join(home_dir,'hydroviewer_creator','shapefiles','selected_shapefiles')) == False:
-    os.mkdir(os.path.join(home_dir,'hydroviewer_creator','shapefiles','selected_shapefiles'))
+if os.path.isdir(os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline')) == False:
+    os.mkdir(os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline'))
 
-if os.path.isdir(os.path.join(home_dir,'hydroviewer_creator','shapefiles','selected_shapefiles','catchment_select')) == False:
-    os.mkdir(os.path.join(home_dir,'hydroviewer_creator','shapefiles','selected_shapefiles','catchment_select'))
+if os.path.isdir(os.path.join(proj_dir,'shapefiles','selected_shapefiles')) == False:
+    os.mkdir(os.path.join(proj_dir,'shapefiles','selected_shapefiles'))
 
-if os.path.isdir(os.path.join(home_dir,'hydroviewer_creator','shapefiles','selected_shapefiles','drainageline_select')) == False:
-    os.mkdir(os.path.join(home_dir,'hydroviewer_creator','shapefiles','selected_shapefiles','drainageline_select'))
+if os.path.isdir(os.path.join(proj_dir,'shapefiles','selected_shapefiles','catchment_select')) == False:
+    os.mkdir(os.path.join(proj_dir,'shapefiles','selected_shapefiles','catchment_select'))
 
-if os.path.isdir(os.path.join(home_dir,'hydroviewer_creator','gjson_files')) == False:
-    os.mkdir(os.path.join(home_dir,'hydroviewer_creator','gjson_files'))
+if os.path.isdir(os.path.join(proj_dir,'shapefiles','selected_shapefiles','drainageline_select')) == False:
+    os.mkdir(os.path.join(proj_dir,'shapefiles','selected_shapefiles','drainageline_select'))
+
+if os.path.isdir(os.path.join(proj_dir,'gjson_files')) == False:
+    os.mkdir(os.path.join(proj_dir,'gjson_files'))
+
+if os.path.isdir(os.path.join(proj_dir,'shapefiles','gjson_shapefiles')) == False:
+    os.mkdir(os.path.join(proj_dir,'shapefiles','gjson_shapefiles'))
+
+if os.path.isdir(os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries')) == False:
+    os.mkdir(os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
+
+if os.path.isdir(os.path.join(proj_dir,'shapefiles','reppoint_shapefile')) == False:
+    os.mkdir(os.path.join(proj_dir,'shapefiles','reppoint_shapefile'))
+
+if os.path.isdir(os.path.join(proj_dir,'shapefiles','reppoint_shapefile','ctch_point')) == False:
+    os.mkdir(os.path.join(proj_dir,'shapefiles','reppoint_shapefile','ctch_point'))
+
+if os.path.isdir(os.path.join(proj_dir,'shapefiles','reppoint_shapefile','dl_point')) == False:
+    os.mkdir(os.path.join(proj_dir,'shapefiles','reppoint_shapefile','dl_point'))
+
+# %%
+user_input = 'Japan'
+
 # %%
 # Creates the map
 m = folium.Map(
@@ -186,99 +207,54 @@ m
 # %%
 
 # The code here reads the exported GeoJSON file drawn on the map
-gjson_file = geopandas.read_file("/home/kyler/Documents/gjson_files/data.geojson")
+gjson_file = geopandas.read_file(os.path.join(proj_dir,'gjson_files','data.geojson'))
 
 # This changes the projection of the GeoJSON to match the shapefiles
 gjson_file = gjson_file.to_crs("EPSG:3857")
 
 # Exports the GeoJSON to a shapefile
-gjson_file = gjson_file.to_file("/home/kyler/Documents/shapefiles/gjson/gshape.shp")
+gjson_file = gjson_file.to_file(os.path.join(proj_dir,'shapefiles','gjson_shapefiles','gshape.shp'))
+# %%
 
 # Reads the GeoJSON shapefile into a GeoDataFrame
-gjson_shp = geopandas.read_file("/home/kyler/Documents/shapefiles/gjson/gshape.shp")
-
-africa_bndry_shp = geopandas.read_file("zip:///home/kyler/Documents/boundaries/africa-geoglows-boundary.shp.zip/africa-geoglows-boundary.shp/africa-geoglows-boundary.shp")
-australia_bndry_shp = geopandas.read_file("zip:///home/kyler/Documents/boundaries/australia-geoglows-boundary.shp.zip/australia-geoglows-boundary.shp/australia-geoglows-boundary.shp")
-centralam_bndry_shp = geopandas.read_file("zip:///home/kyler/Documents/boundaries/central_america-geoglows-boundary.shp.zip/central_america-geoglows-boundary.shp/central_america-geoglows-boundary.shp")
-centralas_bndry_shp = geopandas.read_file("zip:///home/kyler/Documents/boundaries/central_asia-geoglows-boundary.shp.zip/central_asia-geoglows-boundary.shp/central_asia-geoglows-boundary.shp")
-eastas_bndry_shp = geopandas.read_file("zip:///home/kyler/Documents/boundaries/east_asia-geoglows-boundary.shp.zip/east_asia-geoglows-boundary.shp/east_asia-geoglows-boundary.shp")
-europe_bndry_shp = geopandas.read_file("zip:///home/kyler/Documents/boundaries/europe-geoglows-boundary.shp.zip/europe-geoglows-boundary.shp/europe-geoglows-boundary.shp")
-islands_bndry_shp = geopandas.read_file("zip:///home/kyler/Documents/boundaries/islands-geoglows-boundary.shp.zip/islands-geoglows-boundary.shp/islands-geoglows-boundary.shp")
-japan_bndry_shp = geopandas.read_file("zip:///home/kyler/Documents/boundaries/japan-geoglows-boundary.shp.zip/japan-geoglows-boundary.shp/japan-geoglows-boundary.shp")
-mideast_bndry_shp = geopandas.read_file("zip:///home/kyler/Documents/boundaries/middle_east-geoglows-boundary.shp.zip/middle_east-geoglows-boundary.shp/middle_east-geoglows-boundary.shp")
-namerica_bndry_shp = geopandas.read_file("zip:///home/kyler/Documents/boundaries/north_america-geoglows-boundary.shp.zip/north_america-geoglows-boundary.shp/north_america-geoglows-boundary.shp")
-samerica_bndry_shp = geopandas.read_file("zip:///home/kyler/Documents/boundaries/south_america-geoglows-boundary.shp.zip/south_america-geoglows-boundary.shp/south_america-geoglows-boundary.shp")
-sasia_bndry_shp = geopandas.read_file("zip:///home/kyler/Documents/boundaries/south_asia-geoglows-boundary.shp.zip/south_asia-geoglows-boundary.shp/south_asia-geoglows-boundary.shp")
-wasia_bndry_shp = geopandas.read_file("zip:///home/kyler/Documents/boundaries/west_asia-geoglows-boundary.shp.zip/west_asia-geoglows-boundary.shp/west_asia-geoglows-boundary.shp")
-
+gjson_shp = geopandas.read_file(os.path.join(proj_dir,'shapefiles','gjson_shapefiles','gshape.shp'))
 
 # %%
-if gjson_shp.intersects(africa_bndry_shp)[0]==True:
-    dl_url = "zip:///home/kyler/Documents/drainagelines/africa_drainageline.zip/africa_drainageline.shp"
-    ctch_url = "zip:///home/kyler/Documents/catchments/africa_catchment.zip/africa_catchment.shp"
-
-elif gjson_shp.intersects(australia_bndry_shp)[0]==True:
-    dl_url = "zip:///home/kyler/Documents/drainagelines/australia_drainageline.zip/australia_drainageline.shp"
-    ctch_url = "zip:///home/kyler/Documents/catchments/australia_catchment.zip/australia_catchment.shp"
-
-elif gjson_shp.intersects(centralam_bndry_shp)[0]==True:
-    dl_url = "zip:///home/kyler/Documents/drainagelines/centralam_drainageline.zip/centralam_drainageline.shp"
-    ctch_url = "zip:///home/kyler/Documents/catchments/centralam_catchment.zip/centralam_catchment.shp"
-
-elif gjson_shp.intersects(centralas_bndry_shp)[0]==True:
-    dl_url = "zip:///home/kyler/Documents/drainagelines/centralasia_drainageline.zip/centralasia_drainageline.shp"
-    ctch_url = "zip:///home/kyler/Documents/catchments/centralasia_catchment.zip/centralasia_catchment.shp"
-
-elif gjson_shp.intersects(eastas_bndry_shp)[0]==True:
-    dl_url = "zip:///home/kyler/Documents/drainagelines/eastasia_drainageline.zip/eastasia_drainageline.shp"
-    ctch_url = "zip:///home/kyler/Documents/catchments/eastasia_catchment.zip/eastasia_catchment.shp"
-
-elif gjson_shp.intersects(europe_bndry_shp)[0]==True:
-    dl_url = "zip:///home/kyler/Documents/drainagelines/europe_drainageline.zip/europe_drainageline.shp"
-    ctch_url = "zip:///home/kyler/Documents/catchments/europe_catchment.zip/europe_catchment.shp"
-
-elif gjson_shp.intersects(islands_bndry_shp)[0]==True:
-    dl_url = "zip:///home/kyler/Documents/drainagelines/islands_drainageline.zip/islands_drainageline.shp"
-    ctch_url = "zip:///home/kyler/Documents/catchmentsislands_catchment.zip/islands_catchment.shp"
-
-elif gjson_shp.intersects(japan_bndry_shp)[0]==True:
-    dl_url = "zip:///home/kyler/Documents/drainagelines/japan_drainageline.zip/japan_drainageline.shp"
-    ctch_url = "zip:///home/kyler/Documents/catchments/japan_catchment.zip/japan_catchment.shp"
-
-elif gjson_shp.intersects(mideast_bndry_shp)[0]==True:
-    dl_url = "zip:///home/kyler/Documents/drainagelines/middleeast_drainageline.zip/middleeast_drainageline.shp"
-    ctch_url = "zip:///home/kyler/Documents/catchments/middleeast_catchment.zip/middleeast_catchment.shp"
-
-elif gjson_shp.intersects(namerica_bndry_shp)[0]==True:
-    dl_url = "zip:///home/kyler/Documents/drainagelines/northamerica_drainageline.zip/northamerica_drainageline.shp"
-    ctch_url = "zip:///home/kyler/Documents/catchments/northamerica_catchment.zip/northamerica_catchment.shp"
-
-elif gjson_shp.intersects(samerica_bndry_shp)[0]==True:
-    dl_url = "zip:///home/kyler/Documents/drainagelines/samerica_drainageline.zip/samerica_drainageline.shp"
-    ctch_url = "zip:///home/kyler/Documents/catchments/samerica_catchment.zip/samerica_catchment.shp"
-
-elif gjson_shp.intersects(sasia_bndry_shp)[0]==True:
-    dl_url = "zip:///home/kyler/Documents/drainagelines/southasia_drainageline.zip/southasia_drainageline.shp"
-    ctch_url = "zip:///home/kyler/Documents/catchments/southasia_catchment.zip/southasia_catchment.shp"
-
-elif gjson_shp.intersects(wasia_bndry_shp)[0]==True:
-    dl_url = "zip:///home/kyler/Documents/drainagelines/wasia_drainageline.zip/wasia_drainageline.shp"
-    ctch_url = "zip:///home/kyler/Documents/catchments/wasia_catchment.zip/wasia_catchment.shp"
-
+# HydorShare Resource IDs
+japan_id = 'df5f3e52c51b419d8ee143b919a449b3'
+# %%
+from hs_restclient import HydroShare, HydroShareAuthBasic
+auth = HydroShareAuthBasic(username='krashby4', password='Neededtochangehydrosharepassword4*')
+hs = HydroShare(auth=auth)
+fname = 'japan-geoglows-boundary.zip'
+fpath = hs.getResourceFile(japan_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
+# %%
+japan_bndry_shp = geopandas.read_file("zip:///"+os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries','japan-geoglows-boundary.zip','japan-geoglows-boundary.shp'))
 
 # %%
+if gjson_shp.intersects(japan_bndry_shp)[0]==True:
+    fname = 'japan-geoglows-catchment.zip'
+    fpath = hs.getResourceFile(japan_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment'))
+    ctch_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment','japan-geoglows-catchment.zip','japan-geoglows-catchment.shp')
+    fname = 'japan-geoglows-drainageline.zip'
+    fpath = hs.getResourceFile(japan_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline'))
+    dl_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline','japan-geoglows-drainageline.zip','japan-geoglows-drainageline.shp')
+else:
+    print("Drawn polygon is likely in a country that is undefined at the moment")
 
+# %%
 # The two lines below read the downloaded files for the catchment and drainageline shapefiles into GeoDataFrames
-dl_shp = geopandas.read_file(dl_url)
+dl_shp = geopandas.read_file("zip:///"+dl_path)
 
-ctch_shp = geopandas.read_file(ctch_url)
-
+ctch_shp = geopandas.read_file("zip:///"+ctch_path)
+# %%
 # Here the code generates representative points for each polygon in the catchment shapefile/GeoDataFrame
 ctch_point = ctch_shp.representative_point()
 
 # Here the points are exported to a shapefile, if one wishes to view these points in a GIS application. This line is unnecessary in the selection process.
-ctch_point.to_file("/home/kyler/Documents/shapefiles/reppoint_shape/ctch/ctch_point.shp")
+ctch_point.to_file(os.path.join(proj_dir,'shapefiles','reppoint_shapefile','ctch_point','ctch_reppoint.shp'))
 
+# %%
 # The representative points are clipped to the GeoJSON shapefile
 ctch_point_clip = geopandas.clip(ctch_point, gjson_shp)
 
@@ -290,10 +266,10 @@ ctch_boo_list = ctch_point_clip.within(ctch_shp)
 ctch_select = ctch_shp[ctch_boo_list]
 
 # The created GeoDataFrame is then exported into a shapefile
-ctch_select.to_file("/home/kyler/Documents/shapefiles/clip/ctch/ctch_select.shp")
+ctch_select.to_file(os.path.join(proj_dir,'shapefiles','selected_shapefiles','catchment_select','ctch_select.shp'))
 
 # Here the selected catchment shapefile is read into its own GeoDataFrame.
-ctch_select_shp = geopandas.read_file("/home/kyler/Documents/shapefiles/clip/ctch/ctch_select.shp")
+ctch_select_shp = geopandas.read_file(os.path.join(proj_dir,'shapefiles','selected_shapefiles','catchment_select','ctch_select.shp'))
 
 
 # The process to select the corresponding drainagelines is very similar to the process used to select the correct catchments.
@@ -302,7 +278,7 @@ ctch_select_shp = geopandas.read_file("/home/kyler/Documents/shapefiles/clip/ctc
 dl_point = dl_shp.representative_point()
 
 # The points are exported to a shapefile. As before, this line of code serves no real purpose beyond being able to see the points in a GIS application
-dl_point.to_file("/home/kyler/Documents/shapefiles/reppoint_shape/drain/dl_point.shp")
+dl_point.to_file(os.path.join(proj_dir,'shapefiles','reppoint_shapefile','dl_point','dl_reppoint.shp'))
 
 # The representative points are clipped to the selected catchments shapefile
 dl_point_clip = geopandas.clip(dl_point, ctch_select_shp)
@@ -314,9 +290,9 @@ dl_boo_list = dl_point_clip.intersects(dl_shp)
 dl_select = dl_shp[dl_boo_list]
 
 # The GeoDataFrame is then exported into a shapefile.
-dl_select.to_file("/home/kyler/Documents/shapefiles/clip/drain/dl_select.shp")
+dl_select.to_file(os.path.join(proj_dir,'shapefiles','selected_shapefiles','drainageline_select','dl_select.shp'))
 
-dl_select_shp = geopandas.read_file("/home/kyler/Documents/shapefiles/clip/drain/dl_select.shp")
+dl_select_shp = geopandas.read_file(os.path.join(proj_dir,'shapefiles','selected_shapefiles','drainageline_select','dl_select.shp'))
 
 # %%
 nm = folium.Map(
@@ -328,13 +304,13 @@ nm = folium.Map(
 # Adds basemaps to map
 stamen_layer.add_to(nm)
 
-ctch_select_shp.to_file("/home/kyler/Documents/gjson_files/ctch.geojson", driver='GeoJSON')
+ctch_select_shp.to_file(os.path.join(proj_dir,'gjson_files','ctch.geojson'), driver='GeoJSON')
 
-dl_select_shp.to_file("/home/kyler/Documents/gjson_files/dl.geojson", driver='GeoJSON')
+dl_select_shp.to_file(os.path.join(proj_dir,'gjson_files','dl.geojson'), driver='GeoJSON')
 
-ctch_select_gjson = geopandas.read_file("/home/kyler/Documents/gjson_files/ctch.geojson")
+ctch_select_gjson = geopandas.read_file(os.path.join(proj_dir,'gjson_files','ctch.geojson'))
 
-dl_select_gjson = geopandas.read_file("/home/kyler/Documents/gjson_files/dl.geojson")
+dl_select_gjson = geopandas.read_file(os.path.join(proj_dir,'gjson_files','dl.geojson'))
 
 folium.Choropleth(
     geo_data=ctch_select_gjson,
@@ -343,12 +319,9 @@ folium.Choropleth(
     name='Selected catchments'
 ).add_to(nm)
 
-newshapefile_control = folium.LayerControl()
-
-newshapefile_control.add_to(nm)
+newshapefile_control = folium.LayerControl().add_to(nm)
  
 nm
 # %%
-nm.save('/home/kyler/hydroviewer_creator/app_code/hv_selector.html')
-
+nm.save(os.path.join(proj_dir,'app_code','hv_selector.html'))
 # %%
