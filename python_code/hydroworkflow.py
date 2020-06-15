@@ -3,7 +3,9 @@ import geopandas
 import folium
 import folium.plugins
 import os
-
+from hs_restclient import HydroShare, HydroShareAuthBasic
+auth = HydroShareAuthBasic(username='krashby4', password='Neededtochangehydrosharepassword4*')
+hs = HydroShare(auth=auth)
 # %%
 home_dir = os.path.expanduser("~")
 
@@ -211,12 +213,10 @@ gjson_file = gjson_file.to_crs("EPSG:3857")
 
 # Exports the GeoJSON to a shapefile
 gjson_file = gjson_file.to_file(os.path.join(proj_dir,'shapefiles','gjson_shapefiles','gshape.shp'))
-# %%
 
 # Reads the GeoJSON shapefile into a GeoDataFrame
 gjson_shp = geopandas.read_file(os.path.join(proj_dir,'shapefiles','gjson_shapefiles','gshape.shp'))
 
-# %%
 # HydorShare Resource IDs
 africa_id = '121bbce392a841178476001843e7510b'
 australia_id = '9572eb7fa8744807962b9268593bd4ad'
@@ -231,10 +231,7 @@ north_america_id = '43ae93136e10439fbf2530e02156caf0'
 south_america_id = '94f7e730ea034706ae3497a75c764239'
 south_asia_id = 'e8f2896be57643eb91220351b961b494'
 west_asia_id = 'b62087b814804242a1005368d0ba1b82'
-# %%
-from hs_restclient import HydroShare, HydroShareAuthBasic
-auth = HydroShareAuthBasic(username='krashby4', password='Neededtochangehydrosharepassword4*')
-hs = HydroShare(auth=auth)
+
 fname = 'africa-geoglows-boundary.zip'
 fpath = hs.getResourceFile(africa_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
 fname = 'australia-geoglows-boundary.zip'
@@ -261,7 +258,7 @@ fname = 'south_asia-geoglows-boundary.zip'
 fpath = hs.getResourceFile(south_asia_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
 fname = 'west_asia-geoglows-boundary.zip'
 fpath = hs.getResourceFile(west_asia_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
-# %%
+
 africa_bndry_gdf = geopandas.read_file("zip:///"+os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries','africa-geoglows-boundary.zip','africa-geoglows-boundary.shp'))
 australia_bndry_gdf = geopandas.read_file("zip:///"+os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries','australia-geoglows-boundary.zip','australia-geoglows-boundary.shp'))
 central_america_bndry_gdf = geopandas.read_file("zip:///"+os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries','central_america-geoglows-boundary.zip','central_america-geoglows-boundary.shp'))
@@ -275,7 +272,7 @@ north_america_bndry_gdf = geopandas.read_file("zip:///"+os.path.join(proj_dir,'s
 south_america_bndry_gdf = geopandas.read_file("zip:///"+os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries','south_america-geoglows-boundary.zip','south_america-geoglows-boundary.shp'))
 south_asia_bndry_gdf = geopandas.read_file("zip:///"+os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries','south_asia-geoglows-boundary.zip','south_asia-geoglows-boundary.shp'))
 west_asia_bndry_gdf = geopandas.read_file("zip:///"+os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries','west_asia-geoglows-boundary.zip','west_asia-geoglows-boundary.shp'))
-# %%
+
 if gjson_shp.intersects(africa_bndry_gdf)[0]==True:
     fname = 'africa-geoglows-catchment.zip'
     fpath = hs.getResourceFile(africa_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment'))
@@ -286,50 +283,50 @@ if gjson_shp.intersects(africa_bndry_gdf)[0]==True:
 
 elif gjson_shp.intersects(australia_bndry_gdf)[0]==True:
     fname = 'australia-geoglows-catchment.zip'
-    fpath = hs.getResourceFile(africa_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment'))
+    fpath = hs.getResourceFile(australia_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment'))
     ctch_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment','australia-geoglows-catchment.zip','australia-geoglows-catchment.shp')
     fname = 'australia-geoglows-drainageline.zip'
-    fpath = hs.getResourceFile(africa_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline'))
+    fpath = hs.getResourceFile(australia_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline'))
     dl_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline','australia-geoglows-drainageline.zip','australia-geoglows-drainageline.shp')
 
 elif gjson_shp.intersects(central_america_bndry_gdf)[0]==True:
     fname = 'central_america-geoglows-catchment.zip'
-    fpath = hs.getResourceFile(africa_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment'))
+    fpath = hs.getResourceFile(central_america_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment'))
     ctch_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment','central_america-geoglows-catchment.zip','central_america-geoglows-catchment.shp')
     fname = 'central_america-geoglows-drainageline.zip'
-    fpath = hs.getResourceFile(africa_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline'))
+    fpath = hs.getResourceFile(central_america_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline'))
     dl_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline','central_america-geoglows-drainageline.zip','central_america-geoglows-drainageline.shp')
 
 elif gjson_shp.intersects(central_asia_bndry_gdf)[0]==True:
     fname = 'central_asia-geoglows-catchment.zip'
-    fpath = hs.getResourceFile(africa_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment'))
+    fpath = hs.getResourceFile(central_asia_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment'))
     ctch_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment','central_asia-geoglows-catchment.zip','central_asia-geoglows-catchment.shp')
     fname = 'central_asia-geoglows-drainageline.zip'
-    fpath = hs.getResourceFile(africa_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline'))
+    fpath = hs.getResourceFile(central_asia_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline'))
     dl_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline','central_asia-geoglows-drainageline.zip','central_asia-geoglows-drainageline.shp')
 
 elif gjson_shp.intersects(east_asia_bndry_gdf)[0]==True:
     fname = 'east_asia-geoglows-catchment.zip'
-    fpath = hs.getResourceFile(africa_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment'))
+    fpath = hs.getResourceFile(east_asia_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment'))
     ctch_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment','east_asia-geoglows-catchment.zip','east_asia-geoglows-catchment.shp')
     fname = 'east_asia-geoglows-drainageline.zip'
-    fpath = hs.getResourceFile(africa_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline'))
+    fpath = hs.getResourceFile(east_asia_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline'))
     dl_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline','east_asia-geoglows-drainageline.zip','east_asia-geoglows-drainageline.shp')
 
 elif gjson_shp.intersects(europe_bndry_gdf)[0]==True:
     fname = 'europe-geoglows-catchment.zip'
-    fpath = hs.getResourceFile(africa_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment'))
+    fpath = hs.getResourceFile(europe_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment'))
     ctch_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment','europe-geoglows-catchment.zip','europe-geoglows-catchment.shp')
     fname = 'europe-geoglows-drainageline.zip'
-    fpath = hs.getResourceFile(africa_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline'))
+    fpath = hs.getResourceFile(europe_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline'))
     dl_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline','europe-geoglows-drainageline.zip','europe-geoglows-drainageline.shp')
 
 elif gjson_shp.intersects(islands_bndry_gdf)[0]==True:
     fname = 'islands-geoglows-catchment.zip'
-    fpath = hs.getResourceFile(africa_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment'))
+    fpath = hs.getResourceFile(islands_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment'))
     ctch_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment','islands-geoglows-catchment.zip','islands-geoglows-catchment.shp')
     fname = 'islands-geoglows-drainageline.zip'
-    fpath = hs.getResourceFile(africa_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline'))
+    fpath = hs.getResourceFile(islands_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline'))
     dl_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline','islands-geoglows-drainageline.zip','islands-geoglows-drainageline.shp')
 
 elif gjson_shp.intersects(japan_bndry_gdf)[0]==True:
@@ -342,57 +339,55 @@ elif gjson_shp.intersects(japan_bndry_gdf)[0]==True:
 
 elif gjson_shp.intersects(middle_east_bndry_gdf)[0]==True:
     fname = 'middle_east-geoglows-catchment.zip'
-    fpath = hs.getResourceFile(japan_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment'))
+    fpath = hs.getResourceFile(middle_east_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment'))
     ctch_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment','middle_east-geoglows-catchment.zip','middle_east-geoglows-catchment.shp')
     fname = 'middle_east-geoglows-drainageline.zip'
-    fpath = hs.getResourceFile(japan_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline'))
+    fpath = hs.getResourceFile(middle_east_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline'))
     dl_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline','middle_east-geoglows-drainageline.zip','middle_east-geoglows-drainageline.shp')
 
 elif gjson_shp.intersects(north_america_bndry_gdf)[0]==True:
     fname = 'north_america-geoglows-catchment.zip'
-    fpath = hs.getResourceFile(japan_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment'))
+    fpath = hs.getResourceFile(north_america_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment'))
     ctch_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment','north_america-geoglows-catchment.zip','north_america-geoglows-catchment.shp')
     fname = 'north_america-geoglows-drainageline.zip'
-    fpath = hs.getResourceFile(japan_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline'))
+    fpath = hs.getResourceFile(north_america_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline'))
     dl_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline','north_america-geoglows-drainageline.zip','north_america-geoglows-drainageline.shp')
 
 elif gjson_shp.intersects(south_america_bndry_gdf)[0]==True:
     fname = 'south_america-geoglows-catchment.zip'
-    fpath = hs.getResourceFile(japan_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment'))
+    fpath = hs.getResourceFile(south_america_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment'))
     ctch_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment','south_america-geoglows-catchment.zip','south_america-geoglows-catchment.shp')
     fname = 'south_america-geoglows-drainageline.zip'
-    fpath = hs.getResourceFile(japan_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline'))
+    fpath = hs.getResourceFile(south_america_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline'))
     dl_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline','south_america-geoglows-drainageline.zip','south_america-geoglows-drainageline.shp')
 
 elif gjson_shp.intersects(south_asia_bndry_gdf)[0]==True:
     fname = 'south_asia-geoglows-catchment.zip'
-    fpath = hs.getResourceFile(japan_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment'))
+    fpath = hs.getResourceFile(south_asia_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment'))
     ctch_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment','south_asia-geoglows-catchment.zip','south_asia-geoglows-catchment.shp')
     fname = 'south_asia-geoglows-drainageline.zip'
-    fpath = hs.getResourceFile(japan_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline'))
+    fpath = hs.getResourceFile(south_asia_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline'))
     dl_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline','south_asia-geoglows-drainageline.zip','south_asia-geoglows-drainageline.shp')
 
 elif gjson_shp.intersects(west_asia_bndry_gdf)[0]==True:
     fname = 'west_asia-geoglows-catchment.zip'
-    fpath = hs.getResourceFile(japan_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment'))
+    fpath = hs.getResourceFile(west_asia_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment'))
     ctch_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','catchment','west_asia-geoglows-catchment.zip','west_asia-geoglows-catchment.shp')
     fname = 'west_asia-geoglows-drainageline.zip'
-    fpath = hs.getResourceFile(japan_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline'))
+    fpath = hs.getResourceFile(west_asia_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline'))
     dl_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline','west_asia-geoglows-drainageline.zip','west_asia-geoglows-drainageline.shp')
 
-# %%
 # The two lines below read the downloaded files for the catchment and drainageline shapefiles into GeoDataFrames
 dl_shp = geopandas.read_file("zip:///"+dl_path)
 
 ctch_shp = geopandas.read_file("zip:///"+ctch_path)
-# %%
+
 # Here the code generates representative points for each polygon in the catchment shapefile/GeoDataFrame
 ctch_point = ctch_shp.representative_point()
 
 # Here the points are exported to a shapefile, if one wishes to view these points in a GIS application. This line is unnecessary in the selection process.
 ctch_point.to_file(os.path.join(proj_dir,'shapefiles','reppoint_shapefile','ctch_point','ctch_reppoint.shp'))
 
-# %%
 # The representative points are clipped to the GeoJSON shapefile
 ctch_point_clip = geopandas.clip(ctch_point, gjson_shp)
 
@@ -432,7 +427,6 @@ dl_select.to_file(os.path.join(proj_dir,'shapefiles','selected_shapefiles','drai
 
 dl_select_shp = geopandas.read_file(os.path.join(proj_dir,'shapefiles','selected_shapefiles','drainageline_select','dl_select.shp'))
 
-# %%
 # Zip file
 from zipfile import ZipFile
 
@@ -457,8 +451,35 @@ dl_zip.write(os.path.join(proj_dir,'shapefiles','selected_shapefiles','drainagel
 dl_zip.close()
 
 # %%
+# Add file to HydroShare resource
+custom_resource_id = '3f30f822c7594a6c9b8c3da73a14da6f'
 
+fpath = os.path.join(proj_dir,'shapefiles','selected_shapefiles','catchment_select','catchment_select.zip')
+hs.addResourceFile(custom_resource_id,fpath)
 
+fpath = os.path.join(proj_dir,'shapefiles','selected_shapefiles','drainageline_select','drainageline_select.zip')
+hs.addResourceFile(custom_resource_id,fpath)
+
+# Make resource public
+result = hs.setAccessRules(custom_resource_id,public=True)
+
+# %%
+# Unzip resource file
+options = {
+    "zip_with_rel_path": "drainageline_select.zip",
+    "remove_original_zip": False,
+    "overwrite": False
+}
+
+result = hs.resource('3f30f822c7594a6c9b8c3da73a14da6f').functions.unzip(options)
+
+options = {
+    "zip_with_rel_path": "catchment_select.zip",
+    "remove_original_zip": False,
+    "overwrite": False
+}
+
+result = hs.resource('3f30f822c7594a6c9b8c3da73a14da6f').functions.unzip(options)
 # %%
 nm = folium.Map(
     location=[40.76524, 140.399],
