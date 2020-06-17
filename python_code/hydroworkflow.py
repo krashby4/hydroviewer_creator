@@ -232,33 +232,59 @@ south_america_id = '94f7e730ea034706ae3497a75c764239'
 south_asia_id = 'e8f2896be57643eb91220351b961b494'
 west_asia_id = 'b62087b814804242a1005368d0ba1b82'
 
-fname = 'africa-geoglows-boundary.zip'
-fpath = hs.getResourceFile(africa_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
-fname = 'australia-geoglows-boundary.zip'
-fpath = hs.getResourceFile(australia_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
-fname = 'central_america-geoglows-boundary.zip'
-fpath = hs.getResourceFile(central_america_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
-fname = 'central_asia-geoglows-boundary.zip'
-fpath = hs.getResourceFile(central_asia_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
-fname = 'east_asia-geoglows-boundary.zip'
-fpath = hs.getResourceFile(east_asia_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
-fname = 'europe-geoglows-boundary.zip'
-fpath = hs.getResourceFile(europe_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
-fname = 'islands-geoglows-boundary.zip'
-fpath = hs.getResourceFile(islands_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
-fname = 'japan-geoglows-boundary.zip'
-fpath = hs.getResourceFile(japan_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
-fname = 'middle_east-geoglows-boundary.zip'
-fpath = hs.getResourceFile(middle_east_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
-fname = 'north_america-geoglows-boundary.zip'
-fpath = hs.getResourceFile(north_america_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
-fname = 'south_america-geoglows-boundary.zip'
-fpath = hs.getResourceFile(south_america_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
-fname = 'south_asia-geoglows-boundary.zip'
-fpath = hs.getResourceFile(south_asia_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
-fname = 'west_asia-geoglows-boundary.zip'
-fpath = hs.getResourceFile(west_asia_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
+# %%
+if os.path.isfile(os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries','africa-geoglows-boundary.zip')) == False:
+    fname = 'africa-geoglows-boundary.zip'
+    fpath = hs.getResourceFile(africa_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
 
+if os.path.isfile(os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries','australia-geoglows-boundary.zip')) == False:
+    fname = 'australia-geoglows-boundary.zip'
+    fpath = hs.getResourceFile(australia_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
+
+if os.path.isfile(os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries','central_america-geoglows-boundary.zip')) == False:
+    fname = 'central_america-geoglows-boundary.zip'
+    fpath = hs.getResourceFile(central_america_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
+
+if os.path.isfile(os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries','central_asia-geoglows-boundary.zip')) == False:
+    fname = 'central_asia-geoglows-boundary.zip'
+    fpath = hs.getResourceFile(central_asia_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
+
+if os.path.isfile(os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries','east_asia-geoglows-boundary.zip')) == False:
+    fname = 'east_asia-geoglows-boundary.zip'
+    fpath = hs.getResourceFile(east_asia_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
+
+if os.path.isfile(os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries','europe-geoglows-boundary.zip')) == False:
+    fname = 'europe-geoglows-boundary.zip'
+    fpath = hs.getResourceFile(europe_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
+
+if os.path.isfile(os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries','islands-geoglows-boundary.zip')) == False:
+    fname = 'islands-geoglows-boundary.zip'
+    fpath = hs.getResourceFile(islands_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
+
+if os.path.isfile(os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries','japan-geoglows-boundary.zip')) == False:
+    fname = 'japan-geoglows-boundary.zip'
+    fpath = hs.getResourceFile(japan_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
+
+if os.path.isfile(os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries','middle_east-geoglows-boundary.zip')) == False:
+    fname = 'middle_east-geoglows-boundary.zip'
+    fpath = hs.getResourceFile(middle_east_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
+
+if os.path.isfile(os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries','north_america-geoglows-boundary.zip')) == False:
+    fname = 'north_america-geoglows-boundary.zip'
+    fpath = hs.getResourceFile(north_america_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
+
+if os.path.isfile(os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries','south_america-geoglows-boundary.zip')) == False:
+    fname = 'south_america-geoglows-boundary.zip'
+    fpath = hs.getResourceFile(south_america_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
+
+if os.path.isfile(os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries','south_asia-geoglows-boundary.zip')) == False:
+    fname = 'south_asia-geoglows-boundary.zip'
+    fpath = hs.getResourceFile(south_asia_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
+
+if os.path.isfile(os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries','west_asia-geoglows-boundary.zip')) == False:
+    fname = 'west_asia-geoglows-boundary.zip'
+    fpath = hs.getResourceFile(west_asia_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
+# %%
 africa_bndry_gdf = geopandas.read_file("zip:///"+os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries','africa-geoglows-boundary.zip','africa-geoglows-boundary.shp'))
 australia_bndry_gdf = geopandas.read_file("zip:///"+os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries','australia-geoglows-boundary.zip','australia-geoglows-boundary.shp'))
 central_america_bndry_gdf = geopandas.read_file("zip:///"+os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries','central_america-geoglows-boundary.zip','central_america-geoglows-boundary.shp'))
