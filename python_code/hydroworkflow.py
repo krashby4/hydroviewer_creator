@@ -530,6 +530,9 @@ cat.create_featurestore('ctch_select', workspace=workspace, data=shapefile_plus_
 # cat.delete(ctch_store, recurse=True)
 
 # %%
+import folium
+import folium.plugins
+
 nm = folium.Map(
     location=[40.76524, 140.399],
     tiles='',
@@ -537,7 +540,15 @@ nm = folium.Map(
 )
 
 # Adds basemaps to map
-stamen_layer.add_to(nm)
+stamen_layer = folium.TileLayer(
+    tiles='Stamen Terrain',
+    name='Stamen Terrain'
+).add_to(nm)
+
+stamen_layerwc = folium.TileLayer(
+    tiles='Stamen Watercolor',
+    name='Stamen Watercolor'
+).add_to(nm)
 
 tethys_geoserver_url = "https://tethys-staging.byu.edu/geoserver/wms"
 
