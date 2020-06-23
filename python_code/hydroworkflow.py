@@ -4,7 +4,7 @@ import folium
 import folium.plugins
 import os
 from hs_restclient import HydroShare, HydroShareAuthBasic
-auth = HydroShareAuthBasic(username='krashby4', password='Neededtochangehydrosharepassword4*')
+auth = HydroShareAuthBasic(username='', password='')
 hs = HydroShare(auth=auth)
 
 home_dir = os.path.expanduser("~")
@@ -202,6 +202,8 @@ layercontroller = folium.LayerControl().add_to(m)
 # Call and display map
 m
 
+# %%
+m.save(os.path.join(proj_dir,'app_code','hv_selector.html'))
 # %%
 
 # The code here reads the exported GeoJSON file drawn on the map
