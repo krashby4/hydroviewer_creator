@@ -1,5 +1,6 @@
 #%%
 import geopandas
+import pandas
 import folium
 import folium.plugins
 import os
@@ -205,7 +206,7 @@ m
 # %%
 
 # The code here reads the exported GeoJSON file drawn on the map
-gjson_file = geopandas.read_file(os.path.join(proj_dir,'gjson_files','saudi_arabia.json'))
+gjson_file = geopandas.read_file(os.path.join(proj_dir,'gjson_files','data.geojson'))
 
 # This changes the projection of the GeoJSON to match the shapefiles
 gjson_file = gjson_file.to_crs("EPSG:3857")
