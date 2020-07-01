@@ -4,7 +4,7 @@ import folium
 import folium.plugins
 import os
 from hs_restclient import HydroShare, HydroShareAuthBasic
-auth = HydroShareAuthBasic(username='', password='')
+auth = HydroShareAuthBasic(username='krashby4', password='Neededtochangehydrosharepassword4*')
 hs = HydroShare(auth=auth)
 
 home_dir = os.path.expanduser("~")
@@ -203,11 +203,9 @@ layercontroller = folium.LayerControl().add_to(m)
 m
 
 # %%
-m.save(os.path.join(proj_dir,'app_code','hv_selector.html'))
-# %%
 
 # The code here reads the exported GeoJSON file drawn on the map
-gjson_file = geopandas.read_file(os.path.join(proj_dir,'gjson_files','data.geojson'))
+gjson_file = geopandas.read_file(os.path.join(proj_dir,'gjson_files','saudi_arabia.json'))
 
 # This changes the projection of the GeoJSON to match the shapefiles
 gjson_file = gjson_file.to_crs("EPSG:3857")
@@ -217,6 +215,8 @@ gjson_file = gjson_file.to_file(os.path.join(proj_dir,'shapefiles','gjson_shapef
 
 # Reads the GeoJSON shapefile into a GeoDataFrame
 gjson_shp = geopandas.read_file(os.path.join(proj_dir,'shapefiles','gjson_shapefiles','gshape.shp'))
+
+print("Exported gjson shapefile")
 
 # HydorShare Resource IDs
 africa_id = '121bbce392a841178476001843e7510b'
@@ -284,6 +284,8 @@ if os.path.isfile(os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','bo
 if os.path.isfile(os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries','west_asia-geoglows-boundary.zip')) == False:
     fname = 'west_asia-geoglows-boundary.zip'
     fpath = hs.getResourceFile(west_asia_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries'))
+
+print("All boundaries downloaded")
 
 africa_bndry_gdf = geopandas.read_file("zip:///"+os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries','africa-geoglows-boundary.zip','africa-geoglows-boundary.shp'))
 australia_bndry_gdf = geopandas.read_file("zip:///"+os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','boundaries','australia-geoglows-boundary.zip','australia-geoglows-boundary.shp'))
@@ -403,11 +405,15 @@ elif gjson_shp.intersects(west_asia_bndry_gdf)[0]:
     fpath = hs.getResourceFile(west_asia_id,fname,destination=os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline'))
     dl_path = os.path.join(proj_dir,'shapefiles','downloaded_shapefiles','drainageline','west_asia-geoglows-drainageline.zip','west_asia-geoglows-drainageline.shp')
 
+print("Catchments and drainagelines downloaded")
 # The two lines below read the downloaded files for the catchment and drainageline shapefiles into GeoDataFrames
 dl_shp = geopandas.read_file("zip:///"+dl_path)
 
 ctch_shp = geopandas.read_file("zip:///"+ctch_path)
 
+print(ctch_path)
+print(dl_path)
+# %%
 # Here the code generates representative points for each polygon in the catchment shapefile/GeoDataFrame
 ctch_point = ctch_shp.representative_point()
 
@@ -430,7 +436,7 @@ ctch_select.to_file(os.path.join(proj_dir,'shapefiles','selected_shapefiles','ca
 # Here the selected catchment shapefile is read into its own GeoDataFrame.
 ctch_select_shp = geopandas.read_file(os.path.join(proj_dir,'shapefiles','selected_shapefiles','catchment_select','ctch_select.shp'))
 
-
+print("Catchments exported")
 # The process to select the corresponding drainagelines is very similar to the process used to select the correct catchments.
 
 # Here, representative points for the drainagelines are created.
@@ -438,10 +444,12 @@ dl_point = dl_shp.representative_point()
 
 # The points are exported to a shapefile. As before, this line of code serves no real purpose beyond being able to see the points in a GIS application
 dl_point.to_file(os.path.join(proj_dir,'shapefiles','reppoint_shapefile','dl_point','dl_reppoint.shp'))
-
+print("DL points shapefile exported")
 # The representative points are clipped to the selected catchments shapefile
-dl_point_clip = geopandas.clip(dl_point, ctch_select_shp)
-
+dl_point_clip_part1 = geopandas.clip(dl_point, gjson_shp)
+print("DL points clip part 1 complete")
+dl_point_clip = geopandas.clip(dl_point_clip_part1, ctch_select_shp)
+print("DL points clip part two complete")
 # Another boolean list is created. This time, any drainageline that intersects a clipped point is marked as true. Otherwise, it's marked as false.
 dl_boo_list = dl_point_clip.intersects(dl_shp)
 
@@ -453,6 +461,7 @@ dl_select.to_file(os.path.join(proj_dir,'shapefiles','selected_shapefiles','drai
 
 dl_select_shp = geopandas.read_file(os.path.join(proj_dir,'shapefiles','selected_shapefiles','drainageline_select','dl_select.shp'))
 
+print("Drainagelines exported")
 # Zip file
 from zipfile import ZipFile
 
@@ -476,6 +485,7 @@ dl_zip.write(os.path.join(proj_dir,'shapefiles','selected_shapefiles','drainagel
 
 dl_zip.close()
 
+print("All files zipped")
 # %%
 # Add file to HydroShare resource
 custom_resource_id = '3f30f822c7594a6c9b8c3da73a14da6f'
