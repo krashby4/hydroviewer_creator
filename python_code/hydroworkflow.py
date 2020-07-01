@@ -4,6 +4,9 @@ import pandas
 import folium
 import folium.plugins
 import os
+import numpy
+from timeit import default_timer as timer
+# %%
 from hs_restclient import HydroShare, HydroShareAuthBasic
 auth = HydroShareAuthBasic(username='krashby4', password='Neededtochangehydrosharepassword4*')
 hs = HydroShare(auth=auth)
@@ -206,7 +209,7 @@ m
 # %%
 
 # The code here reads the exported GeoJSON file drawn on the map
-gjson_file = geopandas.read_file(os.path.join(proj_dir,'gjson_files','data.geojson'))
+gjson_file = geopandas.read_file(os.path.join(proj_dir,'gjson_files','saudi_arabia.json'))
 
 # This changes the projection of the GeoJSON to match the shapefiles
 gjson_file = gjson_file.to_crs("EPSG:3857")
@@ -414,7 +417,9 @@ ctch_shp = geopandas.read_file("zip:///"+ctch_path)
 
 print(ctch_path)
 print(dl_path)
+
 # %%
+
 # Here the code generates representative points for each polygon in the catchment shapefile/GeoDataFrame
 ctch_point = ctch_shp.representative_point()
 
@@ -440,29 +445,19 @@ ctch_select_shp = geopandas.read_file(os.path.join(proj_dir,'shapefiles','select
 print("Catchments exported")
 # The process to select the corresponding drainagelines is very similar to the process used to select the correct catchments.
 
-# Here, representative points for the drainagelines are created.
-dl_point = dl_shp.representative_point()
+ctch_select_df = pandas.DataFrame(ctch_select_shp, columns=['COMID'])
 
-# The points are exported to a shapefile. As before, this line of code serves no real purpose beyond being able to see the points in a GIS application
-dl_point.to_file(os.path.join(proj_dir,'shapefiles','reppoint_shapefile','dl_point','dl_reppoint.shp'))
-print("DL points shapefile exported")
-# The representative points are clipped to the selected catchments shapefile
-dl_point_clip_part1 = geopandas.clip(dl_point, gjson_shp)
-print("DL points clip part 1 complete")
-dl_point_clip = geopandas.clip(dl_point_clip_part1, ctch_select_shp)
-print("DL points clip part two complete")
-# Another boolean list is created. This time, any drainageline that intersects a clipped point is marked as true. Otherwise, it's marked as false.
-dl_boo_list = dl_point_clip.intersects(dl_shp)
+dl_shp_df = pandas.DataFrame(dl_shp)
 
-# Using the new boolean list, the appropriate drainagelines are selected and added to a new GeoDataFrame
-dl_select = dl_shp[dl_boo_list]
+ctch_select_comid_list = ctch_select_df['COMID'].to_list()
 
-# The GeoDataFrame is then exported into a shapefile.
+dl_select_df = dl_shp_df.loc[dl_shp_df['COMID'].isin(ctch_select_comid_list)]
+
+dl_select = geopandas.GeoDataFrame(dl_select_df)
+
 dl_select.to_file(os.path.join(proj_dir,'shapefiles','selected_shapefiles','drainageline_select','dl_select.shp'))
 
-dl_select_shp = geopandas.read_file(os.path.join(proj_dir,'shapefiles','selected_shapefiles','drainageline_select','dl_select.shp'))
-
-print("Drainagelines exported")
+# %%
 # Zip file
 from zipfile import ZipFile
 
