@@ -8,7 +8,7 @@ import numpy
 from timeit import default_timer as timer
 # %%
 from hs_restclient import HydroShare, HydroShareAuthBasic
-auth = HydroShareAuthBasic(username='krashby4', password='Neededtochangehydrosharepassword4*')
+auth = HydroShareAuthBasic(username='', password='*')
 hs = HydroShare(auth=auth)
 
 home_dir = os.path.expanduser("~")
